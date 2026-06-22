@@ -253,10 +253,4 @@ Anomaly-based detection is the foundational intelligence layer in next-generatio
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
-
----
-
 ⭐ **If you found this useful, please star the repository — it helps the security community discover it!**
