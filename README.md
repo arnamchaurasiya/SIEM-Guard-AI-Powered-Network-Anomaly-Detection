@@ -1,37 +1,40 @@
-# 🔐 Network Intrusion Detection System (NIDS)
+# 🛡️ SIEM-Guard: AI-Powered Network Anomaly Detection
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python)
+![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square&logo=python)
 ![ML](https://img.shields.io/badge/ML-Binary%20%7C%20Multi--class%20Classification-orange?style=flat-square)
-![Security](https://img.shields.io/badge/Domain-Cybersecurity%20%7C%20Network%20Security-red?style=flat-square)
+![Security](https://img.shields.io/badge/Domain-SIEM%20%7C%20SOC%20%7C%20Network%20Security-red?style=flat-square)
 ![Dataset](https://img.shields.io/badge/Dataset-NSL--KDD%20(KDDCUP'99)-lightblue?style=flat-square)
 ![Flask](https://img.shields.io/badge/Deployed-Flask%20App-green?style=flat-square&logo=flask)
 ![Docker](https://img.shields.io/badge/Container-Docker-blue?style=flat-square&logo=docker)
-![Stars](https://img.shields.io/github/stars/vicky60629/Network-Intrusion-Detection-System?style=flat-square)
+![Stars](https://img.shields.io/github/stars/arnamchaurasiya/SIEM-Guard-AI-Powered-Network-Anomaly-Detection?style=flat-square)
 
-> **A machine learning-powered Network Intrusion Detection System (NIDS) that classifies network traffic as normal or malicious — detecting 4 major attack categories with high accuracy — deployed as a live Flask web application.**
+> **SIEM-Guard is an AI/ML-powered anomaly detection engine that mimics core SIEM detection logic — classifying network traffic as normal or one of 4 major attack categories in real-time, deployed as a live Flask web application.**
 
 ---
 
 ## 📌 Problem Statement
 
-With the rapid growth of computer networks, **cybersecurity threats** are more dangerous and frequent than ever. Traditional rule-based security systems struggle to keep up with evolving attack patterns. This project builds a **machine learning-based NIDS** that can:
+Modern enterprise Security Operations Centers (SOCs) rely on **SIEM platforms** to detect threats across thousands of network events per second. Traditional rule-based correlation engines struggle to adapt to novel, zero-day attack patterns.
 
-- Automatically detect whether network activity is **normal or an attack** (binary classification)
-- Identify the **specific type of attack** across 4 major categories (multi-class classification)
-- Replace slow, manual rule-writing with a **data-driven, adaptive** detection system
+**SIEM-Guard** addresses this by applying **machine learning-based anomaly detection** to network traffic data — automating the triage that SOC analysts perform manually:
 
-Achieving **98%+ detection rate** while keeping false alarm rates minimal — a benchmark reported in academic research on anomaly detection.
+- Automatically detect whether network activity is **Normal or an Attack** (binary classification)
+- Identify the **specific attack category** across 4 threat types (multi-class classification)
+- Demonstrate how **AI/ML can enhance SIEM detection logic** beyond static correlation rules
+
+Achieving **98%+ detection accuracy** on the industry-standard NSL-KDD benchmark dataset.
 
 ---
 
-## 🎯 Business & Security Impact
+## 🎯 Alignment to Enterprise Security Products
 
-| Stakeholder | Value Delivered |
-|-------------|----------------|
-| **Security Operations (SOC)** | Real-time automated triage of network alerts |
-| **IT Administrators** | Instantly identify attack type without manual log analysis |
-| **Enterprises** | Reduce Mean Time to Detect (MTTD) for cyber incidents |
-| **Government / Defense** | Protect critical infrastructure from advanced persistent threats |
+| Security Domain | How SIEM-Guard Addresses It |
+|----------------|----------------------------|
+| **SIEM** (Security Information & Event Management) | Replicates network log correlation and anomaly scoring |
+| **SOC Automation** | Automated threat triage — reduces manual analyst workload |
+| **EDR Concepts** | Classifies host-level attack patterns (U2R, R2L) mimicking endpoint telemetry analysis |
+| **Threat Intelligence** | Attack categorization maps to known threat actor TTPs |
+| **Detection Engineering** | ML model acts as an adaptive detection rule that generalises to unseen attacks |
 
 ---
 
@@ -39,20 +42,20 @@ Achieving **98%+ detection rate** while keeping false alarm rates minimal — a 
 
 This system classifies network traffic into **5 classes** — Normal plus 4 attack types:
 
-| Attack Type | Description | Example |
-|-------------|-------------|---------|
+| Attack Type | Description | Real-World Example |
+|-------------|-------------|-------------------|
 | **Normal** | Legitimate network traffic | Regular HTTP, FTP, SSH requests |
-| **DOS** | Denial of Service — overwhelms resources to cause outage | SYN flood, Ping of Death |
-| **PROBE** | Surveillance/scanning to gather network info | Port scanning, Nmap |
-| **R2L** | Remote-to-Local — unauthorized access from a remote machine | Password guessing, FTP exploits |
-| **U2R** | User-to-Root — privilege escalation to gain root access | Buffer overflow, Rootkit installation |
+| **DOS** | Denial of Service — resource exhaustion | SYN flood, Ping of Death, Smurf |
+| **PROBE** | Reconnaissance / network scanning | Port scanning, Nmap, SATAN |
+| **R2L** | Remote-to-Local — unauthorised remote access | Password guessing, FTP exploits, Phishing |
+| **U2R** | User-to-Root — privilege escalation | Buffer overflow, Rootkit, SQL injection |
 
 ---
 
 ## 📊 Dataset — NSL-KDD (KDDCUP'99)
 
 - **Source:** [NSL-KDD Dataset — University of New Brunswick](http://www.unb.ca/cic/datasets/nsl.html)
-- **Type:** Widely used benchmark dataset for network-based anomaly detection research
+- **Type:** Industry-standard benchmark for network-based anomaly detection research
 - **Files:** `Train.txt`, `Test.txt`
 
 ### Feature Categories
@@ -64,82 +67,75 @@ This system classifies network traffic into **5 classes** — Normal plus 4 atta
 | **Traffic** | Time-window statistics | `count`, `srv_count`, `serror_rate` |
 | **Host-based** | Host-level behavioural stats | `dst_host_count`, `dst_host_srv_count` |
 
-> **Key features for R2L detection:** `duration` (connection duration), `service` (service requested), `num_failed_logins` (host-level failed attempts)
+> **Key features for R2L detection:** `duration`, `service`, `num_failed_logins`
 >
-> **Key features for U2R detection:** `num_file_creations` (files created by process), `num_shells` (shell prompts invoked)
+> **Key features for U2R detection:** `num_file_creations`, `num_shells`
 
 ---
 
 ## 🏗️ Project Architecture
 
 ```
-Network-Intrusion-Detection-System/
+SIEM-Guard-AI-Powered-Network-Anomaly-Detection/
 ├── NSL_Dataset/
-│   ├── Train.txt                   # Training data
-│   └── Test.txt                    # Test data
+│   ├── Train.txt                   # Training data (NSL-KDD)
+│   └── Test.txt                    # Test / evaluation data
 ├── results/
-│   ├── 2020-06-15 15_28_16-Window.png
-│   ├── 2020-06-15 15_29_02-Window.png
-│   ├── 2020-06-15 15_30_02-Window.png
-│   ├── 2020-06-15 15_31_30-Window.png
-│   ├── 2020-06-15 15_31_58-Window.png
-│   └── 2020-06-15 15_32_25-Window.png
+│   └── *.png                       # App preview screenshots
 ├── static/
-│   └── style.css
+│   └── style.css                   # Frontend styling
 ├── templates/
-│   └── index.html                  # Flask frontend
-├── Network Intrusion Detection System.ipynb   # Full EDA + Modelling
-├── app.py                          # Flask application
-├── model.pkl                       # Trained classification model
-├── corrm.csv                       # Correlation matrix output
-├── num_summary.csv                 # Numerical features summary
-├── pandas_profiling.html           # Auto-generated EDA report
-├── Dockerfile
-├── Procfile
-├── requirements.txt
-└── LICENSE
+│   └── index.html                  # Flask web UI
+├── Network Intrusion Detection System.ipynb  # Full EDA + Modelling notebook
+├── app.py                          # Flask application (REST API + UI)
+├── model.pkl                       # Serialized trained classification model
+├── corrm.csv                       # Correlation matrix analysis output
+├── num_summary.csv                 # Numerical feature distribution summary
+├── Dockerfile                      # Docker container configuration
+├── Procfile                        # Heroku/Render deployment config
+└── requirements.txt
 ```
 
 ---
 
-## 🔍 Approach
+## 🔍 Technical Approach
 
 ### 1. Exploratory Data Analysis (EDA)
-- Generated automated profiling report using **pandas-profiling** (`pandas_profiling.html`) — a full statistical summary of all 41 features
-- Analysed **correlation matrix** (`corrm.csv`) to identify redundant or highly correlated features
-- Studied class imbalance across 5 attack categories
-- Summarised numerical feature distributions (`num_summary.csv`) to guide preprocessing
+- Statistical profiling of all **41 NSL-KDD features** to understand signal vs. noise
+- **Correlation matrix** analysis (`corrm.csv`) to identify redundant and highly correlated features
+- Class imbalance study across 5 attack categories — critical for realistic SOC alert modelling
+- Feature distribution analysis (`num_summary.csv`) to guide preprocessing decisions
 
 ### 2. Data Preprocessing & Feature Engineering
-- Handled **categorical features**: `protocol_type` (tcp/udp/icmp), `service`, `flag` — encoded to numerical format
-- Applied **label encoding** for multi-class target variable
-- Feature selection based on correlation analysis to reduce dimensionality
+- **Categorical encoding**: `protocol_type` (tcp/udp/icmp), `service`, `flag` → numerical format
+- **Label encoding** for multi-class target variable
+- Feature selection via correlation analysis to reduce dimensionality and improve inference speed
 
-### 3. Two-Layer Classification Strategy
+### 3. Two-Layer Detection Strategy (Mirrors Real SIEM Logic)
 
-**Problem 1 — Binary Classification:**
+**Layer 1 — Binary Classification (Alert Triage):**
 ```
-Input: Network Traffic Features
-Output: Normal (0) or Attack (1)
+Input: Raw Network Traffic Features
+Output: Benign (0) or Malicious (1)
 ```
 
-**Problem 2 — Multi-class Classification:**
+**Layer 2 — Multi-class Classification (Threat Categorisation):**
 ```
-Input: Network Traffic Features
+Input: Raw Network Traffic Features
 Output: Normal | DOS | PROBE | R2L | U2R
 ```
 
-Both problems are solved using the same trained model, allowing flexible deployment.
+This two-layer approach mirrors how enterprise SIEM platforms first **flag an alert**, then **categorise the threat severity and type** for SOC analyst review.
 
 ### 4. Model Training & Serialization
-- Trained a high-accuracy classification model on NSL-KDD training set
-- Evaluated on held-out test set with focus on precision, recall, and F1-score per class
-- Serialized final model as `model.pkl` for production inference via Flask
+- Trained on NSL-KDD training set, evaluated on held-out test set
+- Metrics focused on **precision, recall, and F1-score per class** — standard SOC KPIs
+- Model serialized as `model.pkl` using joblib for fast production inference via Flask
 
 ### 5. Deployment
-- Built a **Flask web application** — users input network traffic features and receive instant attack classification
-- Containerized with **Docker** for easy portability and deployment
-- Originally deployed on Heroku (migrating to Render — see below)
+- **Flask web application** — takes network feature inputs and returns instant threat classification
+- **REST API endpoint** (`/results`) supports programmatic integration with other security tools
+- Containerized with **Docker** for portable, reproducible deployment
 
 ---
 
@@ -149,10 +145,10 @@ Both problems are solved using the same trained model, allowing flexible deploym
 |--------|--------|----------|
 | Detection Rate | ≥ 98% | ✅ High |
 | False Alarm Rate | ≤ 1% | ✅ Low |
-| Classes | 5 (Normal + 4 attacks) | ✅ All covered |
-| Dataset | NSL-KDD benchmark | ✅ Industry standard |
+| Threat Classes Covered | 5 (Normal + 4 attacks) | ✅ All covered |
+| Benchmark Dataset | NSL-KDD (industry standard) | ✅ |
 
-> Academic research on anomaly detection with NSL-KDD reports detection rates of **98%** while maintaining false alarm rates below 1% — a key benchmark this project targets.
+> Academic research on anomaly detection with NSL-KDD reports detection rates of **98%** while maintaining false alarm rates below 1% — a critical performance benchmark for production SIEM deployments.
 
 ---
 
@@ -160,15 +156,14 @@ Both problems are solved using the same trained model, allowing flexible deploym
 
 | Category | Tools |
 |----------|-------|
-| Language | Python 3.8+ |
+| Language | Python 3.10+ |
 | Data Processing | Pandas, NumPy |
-| EDA | pandas-profiling |
+| ML / Detection Engine | Scikit-learn, XGBoost |
 | Visualisation | Matplotlib, Seaborn |
-| Modelling | Scikit-learn |
-| Web Framework | Flask |
-| Serialization | Pickle |
+| Web Framework | Flask (REST API + UI) |
+| Serialization | Joblib / Pickle |
 | Containerization | Docker |
-| Deployment | Heroku → Render |
+| Deployment | Render / Heroku |
 | Notebook | Jupyter Notebook |
 
 ---
@@ -178,8 +173,8 @@ Both problems are solved using the same trained model, allowing flexible deploym
 ### Option 1: Standard Setup
 ```bash
 # Clone the repository
-git clone https://github.com/vicky60629/Network-Intrusion-Detection-System.git
-cd Network-Intrusion-Detection-System
+git clone https://github.com/arnamchaurasiya/SIEM-Guard-AI-Powered-Network-Anomaly-Detection.git
+cd SIEM-Guard-AI-Powered-Network-Anomaly-Detection
 
 # Install dependencies
 pip install -r requirements.txt
@@ -187,25 +182,25 @@ pip install -r requirements.txt
 # Run the Flask app
 python app.py
 ```
-Open `http://localhost:5000` in your browser.
+Open `http://localhost:10000` in your browser.
 
 ### Option 2: Docker
 ```bash
-docker build -t nids-app .
-docker run -p 5000:5000 nids-app
+docker build -t siem-guard .
+docker run -p 10000:10000 siem-guard
 ```
 
 ---
 
 ## 🖥️ How to Use the App
 
-1. Open the web app in your browser
-2. Enter the **network traffic features** into the input form (e.g., duration, protocol type, service, flag, byte counts, connection rates)
+1. Open the web app at `http://localhost:10000`
+2. Enter the **network traffic features** (duration, protocol type, service, flag, byte counts, connection rates, etc.)
 3. Click **"Predict"**
-4. Get an instant classification: **Normal / DOS / PROBE / R2L / U2R**
+4. Get an instant threat classification: **Normal / DOS / PROBE / R2L / U2R**
 
 **Example Input:**
-> Duration: 0, Protocol: TCP, Service: HTTP, Flag: SF, Src Bytes: 181, Dst Bytes: 5450 ...
+> Duration: 0, Protocol: TCP, Service: HTTP, Flag: SF, Src Bytes: 181, Dst Bytes: 5450
 
 **Predicted Output:** ✅ Normal Traffic
 
@@ -219,43 +214,42 @@ docker run -p 5000:5000 nids-app
 
 ---
 
-## 💡 Key Learnings & Future Improvements
+## 💡 Key Learnings & Future Roadmap
 
 **What worked well:**
-- NSL-KDD is a cleaner version of the original KDD'99 dataset — eliminates duplicate records that caused overfitting in older research
-- Two-problem framing (binary + multi-class) provides flexibility for different deployment scenarios
-- pandas-profiling for automated EDA saved significant exploration time
+- NSL-KDD eliminates duplicate records from KDD'99 — reduces overfitting risk seen in older research
+- Two-layer detection framing (binary + multi-class) mirrors real SIEM alert pipeline design
+- REST API design (`/results`) enables future integration with SOAR playbooks and ticketing systems
 
-**Future enhancements:**
-- [ ] Upgrade to **deep learning** — LSTM or CNN to capture sequential network packet patterns
-- [ ] Add **real-time packet capture** using Scapy or PyShark for live traffic analysis
-- [ ] Build an **alert dashboard** with Streamlit showing live attack rate charts
-- [ ] Test on newer datasets: **CICIDS2017** or **UNSW-NB15** for modern attack types
-- [ ] Add **SHAP values** to explain why a specific connection was flagged as an attack
-- [ ] Implement **MLflow** for experiment tracking across model versions
-- [ ] Explore **federated learning** for privacy-preserving NIDS across distributed networks
-
----
-
-## 🔒 Cybersecurity Context
-
-This project addresses two fundamentally different detection paradigms:
-
-**Misuse-based Detection** (Signature-based): Matches known attack patterns — favoured in commercial products for high accuracy and predictability.
-
-**Anomaly-based Detection** (this project's approach): Uses ML to learn "normal" behaviour and flag deviations — more powerful as it can detect **novel, previously unseen attacks** that signature-based systems miss entirely.
+**Planned Enhancements:**
+- [ ] Upgrade detection engine with **LSTM / CNN** to capture sequential packet patterns (aligns with EDR telemetry analysis)
+- [ ] Add **real-time packet capture** via Scapy/PyShark for live SIEM-style stream processing
+- [ ] Build an **alert dashboard** (Streamlit/Grafana) showing live attack rate charts — mimics SOC dashboards
+- [ ] Evaluate on **CICIDS2017** and **UNSW-NB15** datasets for modern attack coverage
+- [ ] Add **SHAP explainability** to generate human-readable alert summaries for SOC analysts
+- [ ] Integrate **MLflow** for model versioning and experiment tracking
+- [ ] Develop **SOAR-compatible output** — auto-generate incident tickets from detections
 
 ---
 
-## 👨‍💻 About the Author
+## 🔒 Detection Paradigm
 
-**Vicky Gupta** — Data Engineering Analyst @ Accenture (4.5 years) | Aspiring Data Scientist
+**SIEM-Guard implements Anomaly-based Detection:**
 
-Passionate about applying machine learning to real-world security and business problems. Experienced in PySpark, ETL pipelines, and deploying end-to-end ML systems to production.
+| Paradigm | Approach | Strength |
+|----------|----------|----------|
+| **Misuse Detection** (Signature-based) | Matches known attack signatures | High accuracy on known threats |
+| **Anomaly Detection** *(this project)* | Learns normal behaviour, flags deviations | Detects **novel, zero-day attacks** signature systems miss |
 
-🔗 [LinkedIn](https://www.linkedin.com/in/vicky-gupta-583016168/) | [GitHub](https://github.com/vicky60629)
+Anomaly-based detection is the foundational intelligence layer in next-generation SIEM, EDR, and SOAR platforms — enabling detection of advanced persistent threats (APTs) that evade traditional rule-based engines.
 
-📧 vg60629@gmail.com
+---
+
+## 👤 Connect
+
+**Arnam Chaurasiya**
+
+🔗 [LinkedIn](https://www.linkedin.com/in/arnamchaurasiya/) | [GitHub](https://github.com/arnamchaurasiya)
 
 ---
 
@@ -265,4 +259,4 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ---
 
-⭐ **If you found this project useful, please star the repository — it helps the community discover it!**
+⭐ **If you found this useful, please star the repository — it helps the security community discover it!**
