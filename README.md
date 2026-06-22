@@ -7,8 +7,13 @@
 ![Flask](https://img.shields.io/badge/Deployed-Flask%20App-green?style=flat-square&logo=flask)
 ![Docker](https://img.shields.io/badge/Container-Docker-blue?style=flat-square&logo=docker)
 ![Stars](https://img.shields.io/github/stars/arnamchaurasiya/SIEM-Guard-AI-Powered-Network-Anomaly-Detection?style=flat-square)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Render-46E3B7?style=flat-square&logo=render)](https://siem-guard-ai-powered-network-anomaly.onrender.com/)
 
 > **SIEM-Guard is an AI/ML-powered anomaly detection engine that mimics core SIEM detection logic — classifying network traffic as normal or one of 4 major attack categories in real-time, deployed as a live Flask web application.**
+
+🔴 **[Live Demo → siem-guard-ai-powered-network-anomaly.onrender.com](https://siem-guard-ai-powered-network-anomaly.onrender.com/)**
+
+> ⚠️ Hosted on Render free tier — may take ~30 seconds to wake up on first visit.
 
 ---
 
@@ -183,6 +188,8 @@ pip install -r requirements.txt
 python app.py
 ```
 Open `http://localhost:10000` in your browser.
+
+> 🌐 **Or use the live hosted version:** [siem-guard-ai-powered-network-anomaly.onrender.com](https://siem-guard-ai-powered-network-anomaly.onrender.com/)
 
 ### Option 2: Docker
 ```bash
